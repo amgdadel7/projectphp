@@ -124,10 +124,24 @@ Route::get('fillable','CrudController@getoffers');
             Route::post('store','CrudController@store')->name('offers.store');
 
             Route::get('edit/{offer_id}','CrudController@editOffer');
-//            Route::post('update','CrudController@updateoffers')->name('offers.update');
-            Route::post('update','CrudController@updateOffer')->name('offers.update');
-            Route::get('all','CrudController@all');
+            Route::post('update/{offer_id}','CrudController@updateOffer')->name('offers.update');
+            Route::get('delete/{offer_id}','CrudController@delete')->name('offers.delete');
+            Route::get('all','CrudController@all')-> name('offers.all');
         });
-
+//        Route::group(['prefix' =>''])
+        Route::get('youtube','CrudController@getVideo');
 //    Route::post('store','CrudController@store')-> name('offers.store');
 });
+
+//###################################################Begin Ajax routes###################################
+Route::group(['prefix' => 'ajax-offers'], function () {
+    Route::get('create', 'OfferController@create');
+    Route::post('store', 'OfferController@store')->name('ajax.offers.store');
+    Route::get('all', 'OfferController@all')->name('ajax.offers.all');
+   Route::post('delete', 'OfferController@delete')->name('ajax.offers.delete');
+   Route::get('edit/{offer_id}', 'OfferController@edit')->name('ajax.offers.edit');
+    Route::post('update', 'OfferController@Update')->name('ajax.offers.update');
+});
+
+
+###################################################Begin Ajax routes###################################

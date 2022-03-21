@@ -108,9 +108,18 @@
                 </div>
                 @endif
                 <br>
-                <form method="POST" action="{{route('offers.store')}}">
+                <form method="POST" action="{{route('offers.store')}}" enctype="multipart/form-data" > {{-- enctype هي التي تسمح برفغ الملفات--}}
                     @csrf
 {{--                    <input name="_token" value="{{csrf_token()}}">--}}
+
+                    <div class="mb-3">
+                        <label for="exampleInputEmail1" class="form-label">{{__('messages.Offer photo')}}</label>
+                        <input type="file" class="form-control" name="photo">
+                        @error('photo')
+                        <div id="emailHelp" class="form-text text-danger" >{{$message}}</div>
+                        @enderror
+                    </div>
+
                     <div class="mb-3">
                         <label for="exampleInputEmail1" class="form-label">{{__('messages.Offer Name_ar')}}</label>
                         <input type="text" class="form-control" name="name_ar" placeholder="{{__('messages.Enter Offer Name_ar')}}">

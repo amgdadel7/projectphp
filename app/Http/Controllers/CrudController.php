@@ -15,7 +15,7 @@ use LaravelLocalization;
 class CrudController extends Controller
 {
 
-//    use OfferTrait;
+use OfferTrait;
 
     public function __construct()
     {
@@ -52,18 +52,18 @@ class CrudController extends Controller
 //        }
 
         //save immage
-//        $file_name = $this -> saveImage($request ->photo,'images/offers');
+        $file_name = $this -> saveImage($request ->photo,'images/offers');
 
         //insert
         Offer::create([
-//            'photo' =>  $file_name,
+            'photo' =>  $file_name,
             'name_ar' => $request->name_ar,
             'name_en' => $request->name_en,
             'price' =>  $request->price,
             'details_ar' => $request->details_ar,
             'details_en' => $request->details_en,
         ]);
-        return redirect()->back()->with(['success' => 'تم اضافة العرض بنجاح']);
+        return redirect()->back()->with(['success' => __('messages.offer added successfully')]);
         // return redirect()->back(); //to go back to main page when error is showen
 //        return $request;
     }
@@ -88,9 +88,9 @@ class CrudController extends Controller
 //        ];
 //}
 
-    public function getAlloffers(){
+    public function all(){
         $offers = Offer::select('id',
-            'price',
+            'price','photo',
             'name_'.LaravelLocalization::getCurrentLocale().' as name',
             'details_'. LaravelLocalization::getCurrentLocale().' as details' )
             -> get();  //return collection
@@ -106,10 +106,26 @@ class CrudController extends Controller
             return  redirect() -> back() ;
         }
 
-        $offer = Offer::select('id','name_ar','name_en','details_ar','details_en','price') -> find($offer_id);
+        $offer = Offer::select('id','photo','name_ar','name_en','details_ar','details_en','price') -> find($offer_id);
 
         return view('offers.edit',compact('offer'));
 
+
+    }
+    public function delete($offer_id)
+    {
+        //check if offer id exists
+
+        $offer = Offer::find($offer_id);   // Offer::where('id','$offer_id') -> first();
+
+        if (!$offer)
+            return redirect()->back()->with(['error' => __('messages.offer not exist')]);
+
+        $offer->delete();
+
+        return redirect()
+            ->route('offers.all')
+            ->with(['success' => __('messages.offer deleted successfully')]);
 
     }
 
@@ -124,7 +140,7 @@ class CrudController extends Controller
         //update
         $offer ->update($request -> all()); //way 1 to updaTE ALL
 
-        return redirect()-> back() -> with(['success'=>'تم التحديث بنجاح']);
+        return redirect()-> back() -> with(['success'=>__('messages.offer updated successfully')]);
         // way 2 to update اعمدة محددة
 //    $offer ->update([
 //       'name_ar'=> $request -> name_ar,
@@ -138,5 +154,10 @@ class CrudController extends Controller
 //        event(new VideoViewer($video));
 //        return view('video')->with('video', $video);
 //    }
+    public function getVideo(){
+        $video = Video::first();
+        event(new VideoViewer($video)); //fire event
+        return view('video')->with('video', $video);
+    }
 
 }

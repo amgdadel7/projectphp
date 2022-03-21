@@ -37,4 +37,10 @@ return [
     "update" => 'تحديث',
     "Search" => 'بحث',
     "Update Offer" => 'تعديل',
+    "Offer photo" =>' صورة للعرض',
+    "Delete" => 'حذف',
+    "offer not exist" => 'العرض غير موجود',
+    "offer deleted successfully" => 'تم الحذف بنجاح',
+    "offer updated successfully" =>'تم التعديل بنجاح',
+    "offer added successfully" => 'تم الضافة بنحاح',
 ];

@@ -38,4 +38,10 @@ return [
     "update" => 'update',
     "Search" => 'Search',
     "Update Offer" => 'Update Offer',
+    "Offer photo" => 'Offer Photo',
+    "Delete" => 'Delete',
+    "offer not exist" => 'offer not exist',
+    "offer deleted successfully" => 'offer deleted successfully',
+    "offer updated successfully" => 'offer updated successfully',
+    "offer added successfully" => 'offer added successfully',
 ];

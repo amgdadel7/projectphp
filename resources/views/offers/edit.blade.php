@@ -128,7 +128,14 @@
             @csrf
             {{--                    <input name="_token" value="{{csrf_token()}}">--}}
             <div class="mb-3">
-                <label for="exampleInputEmail1" class="form-label">{{__('messages.Offer Name ar')}}</label>
+                <label for="exampleInputEmail1" class="form-label">{{__('messages.Offer photo')}}</label>
+                <input type="text" class="form-control" name="photo" value="{{$offer -> photo}}"  >
+                @error('photo')
+                <div id="emailHelp" class="form-text text-danger" >{{$message}}</div>
+                @enderror
+            </div>
+            <div class="mb-3">
+                <label for="exampleInputEmail1" class="form-label">{{__('messages.Offer Name_ar')}}</label>
                 <input type="text" class="form-control" name="name_ar" value="{{$offer -> name_ar}}"   placeholder="{{__('messages.enter name')}}">
                 @error('name_ar')
                 <div id="emailHelp" class="form-text text-danger" >{{$message}}</div>
@@ -137,7 +144,7 @@
             {{--       english   language          --}}
 
             <div class="mb-3">
-                <label for="exampleInputEmail1" class="form-label">{{__('messages.Offer Name en')}}</label>
+                <label for="exampleInputEmail1" class="form-label">{{__('messages.Offer Name_en')}}</label>
                 <input type="text" class="form-control" name="name_en" value="{{$offer -> name_en}}" placeholder="{{__('messages.enter name')}}">
                 @error('name_en')
                 <div id="emailHelp" class="form-text text-danger" >{{$message}}</div>
@@ -145,7 +152,7 @@
             </div>
             {{--                    -------------------                             --}}
             <div class="mb-3">
-                <label for="exampleInputPassword1" class="form-label">Offer Price</label>
+                <label for="exampleInputPassword1" class="form-label">{{__('messages.Offer Price')}}</label>
                 <input type="text" class="form-control" name="price" value="{{$offer -> price}}" placeholder="enter price">
                 @error('price')
                 <small class="form-text text-danger">{{$message}}</small>
