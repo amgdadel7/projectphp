@@ -26,7 +26,17 @@ class CustomAuthController extends Controller
     public function adminLogin(){
         return view('auth.adminLogin');
     }
-    public function checkAdminLogin(){
-        return view('');
+    public function checkAdminLogin(Request $request)
+    {
+        $this->validate($request, [
+            'email'   => 'required|email',
+            'password' => 'required|min:6'
+        ]);
+
+        if (Auth::guard('admin')->attempt(['email' => $request->email, 'password' => $request->password])) {
+
+            return redirect()->intended('/admin');
+        }
+        return back()->withInput($request->only('email'));
     }
 }

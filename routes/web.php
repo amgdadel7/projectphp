@@ -132,7 +132,7 @@ Route::get('fillable','CrudController@getoffers');
             Route::get('all','CrudController@all')-> name('offers.all');
         });
 //        Route::group(['prefix' =>''])
-        Route::get('youtube','CrudController@getVideo');
+        Route::get('youtube','CrudController@getVideo')->middleware('auth');
 //    Route::post('store','CrudController@store')-> name('offers.store');
 });
 
