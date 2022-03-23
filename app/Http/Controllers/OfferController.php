@@ -96,8 +96,16 @@ class OfferController extends Controller
             ]);
 
         //update data
-        $offer->update($request->all());
+//        $offer->update($request->all());
 
+
+        $file_name = $this ->saveImage($request -> photo ,'images/offers');
+        $offer->update([
+            'name'=> $request -> name,
+            'price'=>$request -> price,
+            'details'=>$request -> details,
+            'photo' => $file_name
+        ]);
         return response()->json([
             'status' => true,
             'msg' => 'تم  التحديث بنجاح',

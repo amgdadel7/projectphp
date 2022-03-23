@@ -11,13 +11,8 @@
 |
 */
 
-Route::get('admin', function () {
-    return 'Hello Admin';
-});
 
-//route name
 
-//Route::namespace('Front')->group(function (){
-//    //all route only access controller or methods in folder name Front
-//    Route::get('users','UserController@showUserName');
+//Route::get('/admin', function () {
+//     return 'hellow admin';
 //});

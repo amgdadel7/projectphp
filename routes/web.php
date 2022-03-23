@@ -112,6 +112,9 @@ Auth::routes(['verify'=>true]);
 
 Route::get('/home', 'HomeController@index')->name('home')->middleware('verified');
 //Route::get('/home', 'HomeController@index')->name('home');
+Route::get('/dashboard', function (){
+    return 'Not adult';
+})-> name('not.adult');
 
 Route::get('fillable','CrudController@getoffers');
 
@@ -145,3 +148,25 @@ Route::group(['prefix' => 'ajax-offers'], function () {
 
 
 ###################################################Begin Ajax routes###################################
+
+##################### Begin Authentication && Guards ##############
+
+Route::group(['middleware' => 'CheckAge','namespace' => 'Auth'], function () {
+    Route::get('adults', 'CustomAuthController@adualt')-> name('adult');
+
+});
+Route::get('site', 'Auth\CustomAuthController@site')->middleware('auth:web')-> name('site');
+Route::get('admin','Auth\CustomAuthController@admin')->middleware('auth:admin')->name('admin');
+//Route::get('admin', 'Auth\CustomAuthController@admin')->middleware('auth:admin') -> name('admin');
+
+//Route::get('admin',function (){
+//    return view('admin');
+//})->name('admin');
+
+//middleware('auth')
+//
+Route::get('admin/login', 'Auth\CustomAuthController@adminLogin')-> name('admin.login');
+Route::post('admin/login', 'Auth\CustomAuthController@checkAdminLogin')-> name('save.admin.login');
+
+
+##################### End Authentication && Guards ##############
