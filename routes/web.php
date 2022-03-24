@@ -170,3 +170,10 @@ Route::post('admin/login', 'Auth\CustomAuthController@checkAdminLogin')-> name('
 
 
 ##################### End Authentication && Guards ##############
+
+
+##############Begin relations#######################
+Route::get('has-one','Relation\RelastionsContoroller@hasOneRelation');
+Route::get('has-one-reserve','Relation\RelastionsContoroller@hasOneRelationReverse');
+
+##############End relations#########################
