@@ -172,8 +172,63 @@ Route::post('admin/login', 'Auth\CustomAuthController@checkAdminLogin')-> name('
 ##################### End Authentication && Guards ##############
 
 
-##############Begin relations#######################
+##############Begin one to one relations#######################
 Route::get('has-one','Relation\RelastionsContoroller@hasOneRelation');
 Route::get('has-one-reserve','Relation\RelastionsContoroller@hasOneRelationReverse');
+Route::get('get-user-has-phones','Relation\RelastionsContoroller@getUserHasPhones');
+Route::get('get-user-not-has-phones','Relation\RelastionsContoroller@getUserNotHasPhones');
+Route::get('get-user-where-has-phone-with-condition','Relation\RelastionsContoroller@getUserWhereHasPhoneWithCondition');
 
 ##############End relations#########################
+################## Begin one To many Relationship #####################
+Route::get('hospital-has-many','Relation\RelastionsContoroller@getHospitalDoctors');
+
+Route::get('hospitals','Relation\RelastionsContoroller@hospitals') -> name('hospital.all');
+
+Route::get('doctors/{hospital_id}','Relation\RelastionsContoroller@doctors')-> name('hospital.doctors');
+
+
+
+
+Route::get('hospitals/{hospital_id}','Relation\RelastionsContoroller@deleteHospital') -> name('hospital.delete');
+
+Route::get('hospitals_has_doctors','Relation\RelastionsContoroller@hospitalsHasDoctor');
+
+Route::get('hospitals_has_doctors_male','Relation\RelastionsContoroller@hospitalsHasOnlyMaleDoctors');
+
+Route::get('hospitals_not_has_doctors','Relation\RelastionsContoroller@hospitals_not_has_doctors');
+
+
+################## End one To many Relationship #####################
+
+
+################## Begin  Many To many Relationship #####################
+
+//Route::get('doctors-services','Relation\RelastionsContoroller@getDoctorServices');
+
+//Route::get('service-doctors','Relation\RelastionsContoroller@getServiceDoctors');
+
+
+//Route::get('doctors/services/{doctor_id}','Relation\RelastionsContoroller@getDoctorServicesById')-> name('doctors.services');
+//Route::post('saveServices-to-doctor','Relation\RelastionsContoroller@saveServicesToDoctors')-> name('save.doctors.services');
+
+
+################## End Many To many Relationship #####################
+
+
+######################### has one through ##########################
+
+
+//Route::get('has-one-through','Relation\RelastionsContoroller@getPatientDoctor');
+
+//Route::get('has-many-through','Relation\RelastionsContoroller@getCountryDoctor');
+
+
+################### End relations  routes ########################
+
+
+#######################  Begin accessors and mutators ###################
+
+//Route::get('accessors','Relation\RelastionsContoroller@getDoctors'); //get data
+
+#######################  End accessors and mutators ###################
