@@ -204,13 +204,13 @@ Route::get('hospitals_not_has_doctors','Relation\RelastionsContoroller@hospitals
 
 ################## Begin  Many To many Relationship #####################
 
-//Route::get('doctors-services','Relation\RelastionsContoroller@getDoctorServices');
+Route::get('doctors-services','Relation\RelastionsContoroller@getDoctorServices');
 
-//Route::get('service-doctors','Relation\RelastionsContoroller@getServiceDoctors');
+Route::get('service-doctors','Relation\RelastionsContoroller@getServiceDoctors');
 
 
-//Route::get('doctors/services/{doctor_id}','Relation\RelastionsContoroller@getDoctorServicesById')-> name('doctors.services');
-//Route::post('saveServices-to-doctor','Relation\RelastionsContoroller@saveServicesToDoctors')-> name('save.doctors.services');
+Route::get('doctors/services/{doctor_id}','Relation\RelastionsContoroller@getDoctorServicesById')-> name('doctors.services');
+Route::post('saveServices-to-doctor','Relation\RelastionsContoroller@saveServicesToDoctors')-> name('save.doctors.services');
 
 
 ################## End Many To many Relationship #####################

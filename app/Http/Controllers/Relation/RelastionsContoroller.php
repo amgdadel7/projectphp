@@ -127,30 +127,33 @@ class RelastionsContoroller extends Controller
         return redirect() -> route('hospital.all');
     }
 
-//    public function getDoctorServices()
-//    {
-//        return $doctor = Doctor::with('services')->find(3);
-//        //  return $doctor -> services;
-//    }
-//
-//    public function getServiceDoctors()
-//    {
-//        return $doctors = Service::with(['doctors' => function ($q) {
-//            $q->select('doctors.id', 'name', 'title');
-//        }])->find(1);
-//    }
-//
-//    public function getDoctorServicesById($doctorId)
-//    {
-//        $doctor = Doctor::find($doctorId);
-//        $services = $doctor->services;  //doctor services
-//
-//        $doctors = Doctor::select('id', 'name')->get();
-//        $allServices = Service::select('id', 'name')->get(); // all db serves
-//
-//        return view('doctors.services', compact('services', 'doctors', 'allServices'));
-//    }
-//
+    public function getDoctorServices()
+    {
+        return $doctor = Doctor::with('services')->find(1);
+//          return $doctor -> services;
+//         $doctor -> name;
+
+    }
+
+    public function getServiceDoctors()
+    {
+        return $doctors = Service::with(['doctors' => function ($q) {
+            $q->select('doctors.id', 'name', 'title');
+        }])->find(1);
+
+    }
+
+    public function getDoctorServicesById($doctorId)
+    {
+        $doctor = Doctor::find($doctorId);
+        $services = $doctor->services;  //doctor services
+
+        $doctors = Doctor::select('id', 'name')->get();
+        $allServices = Service::select('id', 'name')->get(); // all db serves
+
+        return view('doctors.services', compact('services', 'doctors', 'allServices'));
+    }
+
 //
 //    public function saveServicesToDoctors(Request $request)
 //    {
