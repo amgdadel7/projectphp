@@ -1,4 +1,7 @@
 <?php
+use App\Mail\NotifyEmail;
+use Illuminate\Support\Facades\Mail;
+define('PAGINATION_COUNT',2);
 
 /*
 |--------------------------------------------------------------------------
@@ -129,7 +132,8 @@ Route::get('fillable','CrudController@getoffers');
             Route::get('edit/{offer_id}','CrudController@editOffer');
             Route::post('update/{offer_id}','CrudController@updateOffer')->name('offers.update');
             Route::get('delete/{offer_id}','CrudController@delete')->name('offers.delete');
-            Route::get('all','CrudController@all')-> name('offers.all');
+            Route::get('all','CrudController@getAllOffers')-> name('offers.all');
+            Route::get('get-all-inactive-offer', 'CrudController@getAllInactiveOffers');
         });
 //        Route::group(['prefix' =>''])
         Route::get('youtube','CrudController@getVideo')->middleware('auth');
@@ -219,9 +223,9 @@ Route::post('saveServices-to-doctor','Relation\RelastionsContoroller@saveService
 ######################### has one through ##########################
 
 
-//Route::get('has-one-through','Relation\RelastionsContoroller@getPatientDoctor');
+Route::get('has-one-through','Relation\RelastionsContoroller@getPatientDoctor');
 
-//Route::get('has-many-through','Relation\RelastionsContoroller@getCountryDoctor');
+Route::get('has-many-through','Relation\RelastionsContoroller@getCountryDoctor');
 
 
 ################### End relations  routes ########################

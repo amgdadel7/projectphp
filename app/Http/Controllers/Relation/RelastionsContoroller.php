@@ -14,43 +14,51 @@ use Illuminate\Http\Request;
 
 class RelastionsContoroller extends Controller
 {
-   public function hasOneRelation(){
-       $user = \App\User::with(['phone'=> function($q){
-         $q -> select('code','phone','user_id');
-       }])->find(1);
+    public function hasOneRelation()
+    {
+        $user = \App\User::with(['phone' => function ($q) {
+            $q->select('code', 'phone', 'user_id');
+        }])->find(1);
 //      return $user -> phone ->code;
 //        $user -> phone;
-       //$phone=$user -> phone;
-       return response() -> json($user);
-   }
-   public function hasOneRelationReverse(){
+        //$phone=$user -> phone;
+        return response()->json($user);
+    }
+
+    public function hasOneRelationReverse()
+    {
 //      $phone= Phone::with('user')->find(1);
-       $phone= Phone::with(['user'=>function($q){
-           $q -> select('id','name');
-       }])->find(1);
+        $phone = Phone::with(['user' => function ($q) {
+            $q->select('id', 'name');
+        }])->find(1);
 
-       //make some attribute visible
-       $phone -> makeVisible(['user_id']);
+        //make some attribute visible
+        $phone->makeVisible(['user_id']);
 //       $phone -> makeHidden(['user_id']); //هذي الميثود عكس الاوله هذي تخفي والاولى تضهر
-       return $phone;
+        return $phone;
 //       return $phone -> user; //return user of this phone number
-       //get all data phone + user
+        //get all data phone + user
 
-   }
-   public function getUserHasPhones(){
-       return User::whereHas('phone') -> get();
+    }
+
+    public function getUserHasPhones()
+    {
+        return User::whereHas('phone')->get();
 
 
-   }
-   public function getUserNotHasPhones(){
-      return User::whereDoesntHave('phone') -> get();
-   }
+    }
 
-   public  function getUserWhereHasPhoneWithCondition(){
-       return User::whereHas('phone',function ($q){
-           $q -> where('code','00967');
-       }) -> get(); //لمن تشتي بيانات معينه من الجدول
-   }
+    public function getUserNotHasPhones()
+    {
+        return User::whereDoesntHave('phone')->get();
+    }
+
+    public function getUserWhereHasPhoneWithCondition()
+    {
+        return User::whereHas('phone', function ($q) {
+            $q->where('code', '00967');
+        })->get(); //لمن تشتي بيانات معينه من الجدول
+    }
 
     ################### one to many relationship mehtods #########
 
@@ -60,7 +68,7 @@ class RelastionsContoroller extends Controller
 
 //         return  $hospital -> doctors;   // return hospital doctors
 
-          $hospital = Hospital::with('doctors')->find(1);
+        $hospital = Hospital::with('doctors')->find(1);
 //        return  $hospital = Hospital::with('doctors')->find(1);
 
 //        return $hospital -> name;
@@ -124,7 +132,7 @@ class RelastionsContoroller extends Controller
         $hospital->doctors()->delete();
         $hospital->delete();
 
-        return redirect() -> route('hospital.all');
+        return redirect()->route('hospital.all');
     }
 
     public function getDoctorServices()
@@ -167,19 +175,18 @@ class RelastionsContoroller extends Controller
         return 'success';
     }
 
-//    public function getPatientDoctor()
-//    {
-//        $patient = Patient::find(2);
-//        return $patient->doctor;
-//    }
-//
-//    public function getCountryDoctor()
-//    {
-//        $country = Country::find(1);
-//        return $country->doctors;
-//    }
-//
-//
+    public function getPatientDoctor()
+    {
+        $patient = Patient::find(2);
+        return $patient -> doctor;
+    }
+
+
+    public function  getCountryDoctor(){
+        $country = Country::find(1);
+        return  $country -> doctors;
+    }
+
 //    public function getDoctors()
 //    {
 //        return $doctors = Doctor::select('id', 'name', 'gender')->get();

@@ -88,14 +88,36 @@ use OfferTrait;
 //        ];
 //}
 
-    public function all(){
-        $offers = Offer::select('id',
-            'price','photo',
-            'name_'.LaravelLocalization::getCurrentLocale().' as name',
-            'details_'. LaravelLocalization::getCurrentLocale().' as details' )
-            -> get();  //return collection
+//    public function all(){
+//        $offers = Offer::select('id',
+//            'price','photo',
+//            'name_'.LaravelLocalization::getCurrentLocale().' as name',
+//            'details_'. LaravelLocalization::getCurrentLocale().' as details' )
+//            -> get();  //return collection
+//
+//        return view('offers.all',compact('offers'));
+//    }
+    public function getAllOffers()
+    {
+        /* $offers = Offer::select('id',
+             'price',
+             'photo',
+             'name_' . LaravelLocalization::getCurrentLocale() . ' as name',
+             'details_' . LaravelLocalization::getCurrentLocale() . ' as details'
+         )->get(); // return collection of all result*/
 
-        return view('offers.all',compact('offers'));
+
+        ##################### paginate result ####################
+        $offers = Offer::select('id',
+            'price',
+            'photo',
+            'name_' . LaravelLocalization::getCurrentLocale() . ' as name',
+            'details_' . LaravelLocalization::getCurrentLocale() . ' as details'
+        )->paginate(PAGINATION_COUNT);
+        //return view('offers.all', compact('offers'));
+
+
+        return view('offers.paginations',compact('offers'));
     }
 
     public function editOffer($offer_id){
@@ -158,6 +180,22 @@ use OfferTrait;
         $video = Video::first();
         event(new VideoViewer($video)); //fire event
         return view('video')->with('video', $video);
+    }
+    public function getAllInactiveOffers(){
+
+        // where  whereNull whereNotNull whereIn
+        //Offer::whereNotNull('details_ar') -> get();
+
+        //return  $inactiveOffers = Offer::inactive()->get();  //all inactive offers
+
+        // global scope
+        // return  $inactiveOffers = Offer::get();  //all inactive offers
+
+        // how to  remove global scope
+
+        return $offer  = Offer::withoutGlobalScope(OfferScope::class)->get();
+
+
     }
 
 }
