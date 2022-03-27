@@ -154,19 +154,19 @@ class RelastionsContoroller extends Controller
         return view('doctors.services', compact('services', 'doctors', 'allServices'));
     }
 
-//
-//    public function saveServicesToDoctors(Request $request)
-//    {
-//
-//        $doctor = Doctor::find($request->doctor_id);
-//        if (!$doctor)
-//            return abort('404');
-//        // $doctor ->services()-> attach($request -> servicesIds);  // many to many insert to database
-//        //$doctor ->services()-> sync($request -> servicesIds);
-//        $doctor->services()->syncWithoutDetaching($request->servicesIds);
-//        return 'success';
-//    }
-//
+
+    public function saveServicesToDoctors(Request $request)
+    {
+
+        $doctor = Doctor::find($request->doctor_id);
+        if (!$doctor)
+            return abort('404');
+        // $doctor ->services()-> attach($request -> servicesIds);  // many to many insert to database يقوم باضافه حتى لوكانت الخدمات موجودة مسبقا
+        //$doctor ->services()-> sync($request -> servicesIds); //يقوم بالتحقق اذا كانت الخدمه موجوده مايضيفها لو مش موجوده يضيفها وايضا يمسح القديم ويضيف الجديد فقط
+        $doctor->services()->syncWithoutDetaching($request->servicesIds);//يحتفض بالقديم ويزود الخدمه اذا كانت مش موجوده
+        return 'success';
+    }
+
 //    public function getPatientDoctor()
 //    {
 //        $patient = Patient::find(2);
